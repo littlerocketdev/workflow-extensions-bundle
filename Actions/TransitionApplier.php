@@ -98,11 +98,13 @@ class TransitionApplier
                     sprintf('Workflow cannot apply transition "%s" due to exception. Details: %s', $transition, $e->getMessage()),
                     $loggerContext
                 );
+                throw $e;
             } catch (Throwable $e) {
                 $this->logger->critical(
                     sprintf('Workflow cannot apply transition "%s" due to exception. Details: %s', $transition, $e->getMessage()),
                     $loggerContext
                 );
+                throw $e;
             }
         }
     }

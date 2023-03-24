@@ -1,5 +1,5 @@
 {
-    "name": "gtt/workflow-extensions-bundle",
+    "name": "littlerocketdev/workflow-extensions-bundle",
     "description": "Bundle for extended workflow management and automation",
     "type": "symfony-bundle",
     "license": "MIT",
