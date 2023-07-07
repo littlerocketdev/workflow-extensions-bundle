@@ -1,4 +1,5 @@
-<?php
+<?php /** @noinspection PhpPropertyOnlyWrittenInspection */
+
 /**
  * This file is part of the Global Trading Technologies Ltd workflow-extension-bundle package.
  *

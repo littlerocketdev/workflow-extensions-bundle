@@ -32,8 +32,8 @@ class ContainerAwareExpressionLanguage extends ExpressionLanguage
     /**
      * ContainerAwareExpressionLanguage constructor
      *
-     * @param ContainerInterface                    $container DI Container
-     * @param CacheItemPoolInterface                $cache     cache
+     * @param ContainerInterface $container DI Container
+     * @param CacheItemPoolInterface|null $cache cache
      * @param ExpressionFunctionProviderInterface[] $providers providers list
      */
     public function __construct(ContainerInterface $container, CacheItemPoolInterface $cache = null, array $providers = array())

@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace Gtt\Bundle\WorkflowExtensionsBundle\DependencyInjection;
 
 use DateInterval;
+use Exception;
 use Gtt\Bundle\WorkflowExtensionsBundle\Action\Reference\ActionReferenceInterface;
 use Gtt\Bundle\WorkflowExtensionsBundle\DependencyInjection\Enum\ActionArgumentTypes;
 use Gtt\Bundle\WorkflowExtensionsBundle\Utils\ArrayUtils;
@@ -25,6 +26,11 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\Config\Definition\Processor;
 
+use function array_key_exists;
+use function count;
+use function is_array;
+use function is_scalar;
+
 /**
  * Configuration class for DI
  */
@@ -35,10 +41,10 @@ class Configuration implements ConfigurationInterface
      *
      * @return TreeBuilder The tree builder
      */
-    public function getConfigTreeBuilder()
+    public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('workflow_extensions');
-        $rootNode    = $treeBuilder->root('workflow_extensions');
+        $rootNode    = $treeBuilder->getRootNode();
 
         $rootNode
             ->children()
@@ -208,7 +214,7 @@ class Configuration implements ConfigurationInterface
                                         ->beforeNormalization()
                                             ->ifTrue(static function ($v) {
                                                 // place arguments under 'arguments' key in order to validate it in common way
-                                                return \is_array($v) && !(\count($v) === 1 && \array_key_exists('arguments', $v));
+                                                return is_array($v) && !(count($v) === 1 && array_key_exists('arguments', $v));
                                             })
                                             ->then(static function ($v) {
                                                 return ['arguments' => $v];
@@ -289,10 +295,10 @@ class Configuration implements ConfigurationInterface
                 ->end()
                 ->beforeNormalization()
                     ->ifTrue(static function ($v) {
-                        return \is_scalar($v) || (\is_array($v) && !ArrayUtils::isArrayAssoc($v));
+                        return is_scalar($v) || (is_array($v) && !ArrayUtils::isArrayAssoc($v));
                     })
                     ->then(static function ($v) {
-                        $type = \is_scalar($v) ? ActionArgumentTypes::TYPE_SCALAR : ActionArgumentTypes::TYPE_ARRAY;
+                        $type = is_scalar($v) ? ActionArgumentTypes::TYPE_SCALAR : ActionArgumentTypes::TYPE_ARRAY;
                         return [
                             'type'  => $type,
                             'value' => $v
@@ -301,7 +307,7 @@ class Configuration implements ConfigurationInterface
                 ->end()
                 ->validate()
                     ->ifTrue(static function ($v) {
-                        return \is_array($v) && $v['type'] === ActionArgumentTypes::TYPE_ARRAY;
+                        return is_array($v) && $v['type'] === ActionArgumentTypes::TYPE_ARRAY;
                     })
                     ->then(function ($v) {
                         // recursive processing of array values
@@ -367,7 +373,7 @@ class Configuration implements ConfigurationInterface
                         new DateInterval($v);
 
                         return $v;
-                    } catch (\Exception $e) {
+                    } catch (Exception $e) {
                         throw new InvalidConfigurationException(
                             sprintf('Scheduled transition offset value %s is not valid. '.
                                 'Please use ISO 8601 duration spec. Details: %s',

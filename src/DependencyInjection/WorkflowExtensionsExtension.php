@@ -31,31 +31,31 @@ class WorkflowExtensionsExtension extends Extension
     /**
      * {@inheritdoc}
      */
-    public function load(array $config, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container)
     {
-        $configuration = $this->getConfiguration($config, $container);
-        $config = $this->processConfiguration($configuration, $config);
+        $configuration = $this->getConfiguration($configs, $container);
+        $configs = $this->processConfiguration($configuration, $configs);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 
         $loader->load('actions.xml');
 
-        $this->registerSubjectManipulatorConfiguration($loader, $container, $config['subject_manipulator']);
-        $this->registerContextConfiguration($container, $config['context']);
+        $this->registerSubjectManipulatorConfiguration($loader, $container, $configs['subject_manipulator']);
+        $this->registerContextConfiguration($container, $configs['context']);
 
-        if (array_key_exists('workflows', $config)) {
-            $this->registerWorkflowsConfiguration($loader, $container, $config['workflows']);
+        if (array_key_exists('workflows', $configs)) {
+            $this->registerWorkflowsConfiguration($loader, $container, $configs['workflows']);
         }
 
         // if there are triggers with actions scheduling, register scheduler config
         if ($container->getParameter('gtt.workflow.workflows_with_scheduling')) {
-            $this->registerSchedulerConfiguration($loader, $container, $config['scheduler']);
+            $this->registerSchedulerConfiguration($loader, $container, $configs['scheduler']);
         } else {
             // remove scheduler listener if scheduler is not used
             $container->removeDefinition('gtt.workflow.trigger.event.listener.scheduler');
         }
 
-        if (array_key_exists('actions', $config)) {
-            $this->registerActionsConfiguration($config['actions'], $container);
+        if (array_key_exists('actions', $configs)) {
+            $this->registerActionsConfiguration($configs['actions'], $container);
         }
     }
 

@@ -15,7 +15,7 @@ namespace Gtt\Bundle\WorkflowExtensionsBundle\Trigger\Event;
 use Gtt\Bundle\WorkflowExtensionsBundle\WorkflowContext;
 use Gtt\Bundle\WorkflowExtensionsBundle\WorkflowSubject\SubjectManipulator;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\Workflow\Registry;
 

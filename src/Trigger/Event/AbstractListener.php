@@ -12,15 +12,18 @@ declare(strict_types=1);
 
 namespace Gtt\Bundle\WorkflowExtensionsBundle\Trigger\Event;
 
+use Closure;
 use Exception;
 use Gtt\Bundle\WorkflowExtensionsBundle\Exception\UnsupportedTriggerEventException;
 use Gtt\Bundle\WorkflowExtensionsBundle\WorkflowContext;
 use Gtt\Bundle\WorkflowExtensionsBundle\WorkflowSubject\SubjectManipulator;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\Workflow\Registry;
 use Throwable;
+
+use function is_object;
 
 /**
  * Holds base functionality for all workflow event listeners
@@ -148,7 +151,7 @@ abstract class AbstractListener
      * For now all the errors and exceptions are logged and rethrown.
      * There is an ability to configure exception catching in the future in order to make possible next execution.
      *
-     * @param \Closure        $closure         closure to be executed safely
+     * @param Closure        $closure         closure to be executed safely
      * @param string          $eventName       event name
      * @param WorkflowContext $workflowContext workflow context
      * @param string          $activity        description of the current listener activity (required for logging
@@ -157,7 +160,7 @@ abstract class AbstractListener
      * @throws Exception|Throwable in case of failure
      */
     protected function execute(
-        \Closure $closure,
+        Closure $closure,
         string $eventName,
         WorkflowContext $workflowContext,
         string $activity = 'react'
@@ -195,7 +198,7 @@ abstract class AbstractListener
             /** @var object|mixed $subject */
             $subject = $this->subjectRetrieverLanguage->evaluate($subjectRetrievingExpression, ['event' => $event]);
 
-            if (!\is_object($subject)) {
+            if (!is_object($subject)) {
                 $error = sprintf(
                     "Subject retrieving from '%s' event by expression '%s' ended with empty or non-object result",
                     $eventName,
@@ -231,12 +234,10 @@ abstract class AbstractListener
      */
     private function getWorkflowContext($subject, string $workflowName): WorkflowContext
     {
-        $workflowContext = new WorkflowContext(
+        return new WorkflowContext(
             $this->workflowRegistry->get($subject, $workflowName),
             $subject,
             $this->subjectManipulator->getSubjectId($subject)
         );
-
-        return $workflowContext;
     }
 }

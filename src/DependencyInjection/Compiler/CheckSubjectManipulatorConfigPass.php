@@ -17,6 +17,8 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
+use function in_array;
+
 /**
  * Checks that all necessary options for scheduler are set for classes supported by corresponding workflows
  */
@@ -75,8 +77,8 @@ class CheckSubjectManipulatorConfigPass implements CompilerPassInterface
 
                 $workflowId = substr($workflowIdWithPrefix, strlen(self::WORKFLOW_ID_PREFIX));
 
-                if (\in_array($workflowId, $workflowsWithScheduling) &&
-                    !\in_array(ltrim($workflowSupportedClass, "\\"), $subjectClassesWithSubjectFromDomain)) {
+                if (in_array($workflowId, $workflowsWithScheduling) &&
+                    !in_array(ltrim($workflowSupportedClass, "\\"), $subjectClassesWithSubjectFromDomain)) {
                     throw new InvalidConfigurationException(
                         sprintf(
                             'Workflow "%s" configured to use scheduler so all the supported subject classes for it'.

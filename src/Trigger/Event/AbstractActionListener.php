@@ -20,9 +20,11 @@ use Gtt\Bundle\WorkflowExtensionsBundle\Utils\ArrayUtils;
 use Gtt\Bundle\WorkflowExtensionsBundle\WorkflowContext;
 use Gtt\Bundle\WorkflowExtensionsBundle\WorkflowSubject\SubjectManipulator;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\Workflow\Registry;
+
+use function is_scalar;
 
 /**
  * Abstract implementation for all action-related listeners
@@ -36,15 +38,6 @@ abstract class AbstractActionListener extends AbstractListener
      */
     private $actionLanguage;
 
-    /**
-     * AbstractListener constructor.
-     *
-     * @param ExpressionLanguage $subjectRetrieverLanguage subject retriever expression language
-     * @param SubjectManipulator $subjectManipulator       subject manipulator
-     * @param Registry           $workflowRegistry         workflow registry
-     * @param LoggerInterface    $logger                   logger
-     * @param ExpressionLanguage $actionLanguage           action expression language
-     */
     public function __construct(
         ExpressionLanguage $subjectRetrieverLanguage,
         SubjectManipulator $subjectManipulator,
@@ -120,7 +113,7 @@ abstract class AbstractActionListener extends AbstractListener
                     $expressionResult = $this->actionLanguage->evaluate($argument['value'], ['event' => $event, 'workflowContext' => $workflowContext]);
                     $isNonAssocArrayResult = is_array($expressionResult) && !ArrayUtils::isArrayAssoc($expressionResult);
                     // expression result should be scalar or non assoc Array
-                    if (!($expressionResult === null || \is_scalar($expressionResult) || $isNonAssocArrayResult)) {
+                    if (!($expressionResult === null || is_scalar($expressionResult) || $isNonAssocArrayResult)) {
                         throw ActionException::actionExpressionArgumentIsMalformed($actionName, $argument['value'], $expressionResult);
                     }
                     $result[] = $expressionResult;

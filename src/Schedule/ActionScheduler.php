@@ -13,7 +13,8 @@ declare(strict_types=1);
 namespace Gtt\Bundle\WorkflowExtensionsBundle\Schedule;
 
 use Carbon\Carbon;
-use Doctrine\Common\Persistence\ObjectManager;
+use DateTime;
+use Doctrine\Persistence\ObjectManager;
 use Gtt\Bundle\WorkflowExtensionsBundle\Entity\Repository\ScheduledJobRepository;
 use Gtt\Bundle\WorkflowExtensionsBundle\Entity\ScheduledJob;
 use Gtt\Bundle\WorkflowExtensionsBundle\Schedule\ValueObject\ScheduledAction;
@@ -152,9 +153,9 @@ class ActionScheduler
      *
      * @param ScheduledAction $scheduledAction scheduled action
      *
-     * @return \DateTime
+     * @return DateTime
      */
-    private function getActionExecutionDate(ScheduledAction $scheduledAction): \DateTime
+    private function getActionExecutionDate(ScheduledAction $scheduledAction): DateTime
     {
         $executionDate = Carbon::now();
         $executionDate->add($scheduledAction->getOffset());

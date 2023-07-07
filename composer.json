@@ -7,29 +7,33 @@
         {
             "name": "Alex Medvedev (fduch)",
             "email": "alex.medwedew@gmail.com"
+        },
+        {
+            "name": "Daan Gebraad",
+            "email": "daan@littlerocket.nl"
         }
     ],
     "require": {
-        "php": "~7.2",
-        "psr/container": "^1.0",
-        "symfony/expression-language": "^4.0",
-        "symfony/framework-bundle": "^4.0",
-        "symfony/workflow": "^4.0"
+        "php": "^7.4 || ^8.0",
+        "psr/container": "*",
+        "symfony/expression-language": "*",
+        "symfony/framework-bundle": "^5.4",
+        "symfony/workflow": "*"
     },
     "require-dev": {
-        "doctrine/doctrine-bundle": "~1.0",
-        "doctrine/doctrine-fixtures-bundle": "^2.2",
-        "doctrine/orm": "^2.4.8",
-        "jms/job-queue-bundle": "^2.0",
-        "nesbot/carbon": "^1.21",
-        "phpunit/phpunit": "~8.0",
-        "symfony/browser-kit": "^4.0",
-        "symfony/monolog-bundle": "^3.0",
-        "symfony/property-access": "^4.0",
-        "symfony/yaml": "^4.0"
+        "doctrine/doctrine-bundle": "*",
+        "doctrine/doctrine-fixtures-bundle": "*",
+        "doctrine/orm": "*",
+        "littlerocket/job-queue-bundle": "^3.0",
+        "nesbot/carbon": "*",
+        "phpunit/phpunit": "*",
+        "symfony/browser-kit": "*",
+        "symfony/monolog-bundle": "*",
+        "symfony/property-access": "*",
+        "symfony/yaml": "*"
     },
     "suggest": {
-        "jms/job-queue-bundle": "Needed for workflow transitions scheduling",
+        "littlerocket/job-queue-bundle": "Needed for workflow transitions scheduling",
         "symfony/console": "Needed for workflow transitions scheduling",
         "nesbot/carbon": "Needed for workflow transitions scheduling",
         "doctrine/doctrine-bundle": "Required for OrmPersistentMarkingStore usage"
@@ -41,7 +45,10 @@
         "psr-4": { "Gtt\\Bundle\\WorkflowExtensionsBundle\\": "tests" }
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "platform": {
+            "php": "7.4.33"
+        }
     },
     "extra": {
         "branch-alias": {

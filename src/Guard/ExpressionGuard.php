@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace Gtt\Bundle\WorkflowExtensionsBundle\Guard;
 
+use Exception;
 use Gtt\Bundle\WorkflowExtensionsBundle\Exception\UnsupportedGuardEventException;
 use Gtt\Bundle\WorkflowExtensionsBundle\WorkflowContext;
 use Gtt\Bundle\WorkflowExtensionsBundle\WorkflowSubject\SubjectManipulator;
@@ -99,7 +100,7 @@ class ExpressionGuard
      * @param GuardEvent $event
      * @param string     $eventName
      *
-     * @throws \Exception in case of failure
+     * @throws Exception in case of failure
      */
     public function guardTransition(GuardEvent $event, string $eventName): void
     {

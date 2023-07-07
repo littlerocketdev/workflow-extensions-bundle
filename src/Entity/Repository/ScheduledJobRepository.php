@@ -17,6 +17,8 @@ use Gtt\Bundle\WorkflowExtensionsBundle\Entity\ScheduledJob;
 use Gtt\Bundle\WorkflowExtensionsBundle\Exception\NonUniqueReschedulabeJobFoundException;
 use JMS\JobQueueBundle\Entity\Job;
 
+use function count;
+
 /**
  * ScheduledJobRepository
  */
@@ -58,7 +60,7 @@ QUERY;
             return null;
         }
 
-        if (\count($scheduledJobsToReschedule) > 1) {
+        if (count($scheduledJobsToReschedule) > 1) {
             // since there is normally only one scheduled pending/new job here
             // (because an attempt to schedule duplicate job raises rescheduling of the first one)
             // we throwing exception in case of several results here
