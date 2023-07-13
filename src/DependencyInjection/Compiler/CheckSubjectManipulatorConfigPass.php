@@ -32,7 +32,7 @@ class CheckSubjectManipulatorConfigPass implements CompilerPassInterface
     /**
      * Name of the method used to register workflows in registry
      */
-    public const WORKFLOW_REGISTRY_ADD_WORKFLOW_METHOD_NAME = "add";
+    public const WORKFLOW_REGISTRY_ADD_WORKFLOW_METHOD_NAME = "addWorkflow";
 
     /**
      * {@inheritdoc}
