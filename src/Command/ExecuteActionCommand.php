@@ -121,7 +121,7 @@ EOT
      *
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $actionName        = $input->getOption('action');
         $encodedParameters = $input->getOption('arguments');
@@ -135,5 +135,6 @@ EOT
         $workflowContext = new WorkflowContext($this->workflowRegistry->get($subject, $workflowName), $subject, $subjectId);
 
         $this->actionExecutor->execute($workflowContext, $actionName, $parameters);
+        return Command::SUCCESS;
     }
 }
