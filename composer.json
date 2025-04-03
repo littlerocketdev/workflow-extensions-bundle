@@ -14,10 +14,10 @@
         }
     ],
     "require": {
-        "php": "^7.4 || ^8.0",
+        "php": "^7.4 || ^8.0 || ^8.3",
         "psr/container": "*",
         "symfony/expression-language": "*",
-        "symfony/framework-bundle": "^4.4 || ^5.4",
+        "symfony/framework-bundle": "^4.4 || ^5.4 || ^7.2",
         "symfony/workflow": "*"
     },
     "require-dev": {
@@ -47,7 +47,7 @@
     "config": {
         "sort-packages": true,
         "platform": {
-            "php": "7.4.33"
+            "php": "8.3"
         }
     },
     "extra": {
