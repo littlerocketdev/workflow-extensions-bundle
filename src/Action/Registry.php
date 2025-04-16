@@ -75,7 +75,7 @@ class Registry implements IteratorAggregate
         return $this->actions[$actionName];
     }
 
-    public function getIterator()
+    public function getIterator(): ArrayIterator
     {
         return new ArrayIterator($this->actions);
     }

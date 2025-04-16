@@ -47,7 +47,7 @@ class ContainerAwareExpressionLanguage extends ExpressionLanguage
      *
      * {@inheritdoc}
      */
-    public function compile($expression, $names = array())
+    public function compile($expression, $names = array()): string
     {
         return parent::compile($expression, array_unique(array_merge($names, ["container"])));
     }
