@@ -15,7 +15,9 @@ namespace Gtt\Bundle\WorkflowExtensionsBundle\ExpressionLanguage;
 use Psr\Cache\CacheItemPoolInterface;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\DependencyInjection\ExpressionLanguage;
+use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\ExpressionLanguage\ExpressionFunctionProviderInterface;
+use Symfony\Component\ExpressionLanguage\ParsedExpression;
 
 /**
  * Extends DI Expression Language with container variable holds ContainerInterface implementation
@@ -47,7 +49,7 @@ class ContainerAwareExpressionLanguage extends ExpressionLanguage
      *
      * {@inheritdoc}
      */
-    public function compile($expression, $names = array()): string
+    public function compile(Expression|string $expression, array $names = array()): string
     {
         return parent::compile($expression, array_unique(array_merge($names, ["container"])));
     }
@@ -57,7 +59,7 @@ class ContainerAwareExpressionLanguage extends ExpressionLanguage
      *
      * {@inheritdoc}
      */
-    public function evaluate($expression, $values = array())
+    public function evaluate(Expression|string $expression, array $values = array()): mixed
     {
         return parent::evaluate($expression, $values + ["container" => $this->container]);
     }
@@ -67,7 +69,7 @@ class ContainerAwareExpressionLanguage extends ExpressionLanguage
      *
      * {@inheritdoc}
      */
-    public function parse($expression, $names)
+    public function parse(Expression|string $expression, array $names): ParsedExpression
     {
         return parent::parse($expression, array_unique(array_merge($names, ["container"])));
     }
