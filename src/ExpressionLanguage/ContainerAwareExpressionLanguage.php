@@ -69,7 +69,7 @@ class ContainerAwareExpressionLanguage extends ExpressionLanguage
      *
      * {@inheritdoc}
      */
-    public function parse(Expression|string $expression, array $names): ParsedExpression
+    public function parse(Expression|string $expression, array $names, int $flags = 0): ParsedExpression
     {
         return parent::parse($expression, array_unique(array_merge($names, ["container"])));
     }
