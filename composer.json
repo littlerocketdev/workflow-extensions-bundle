@@ -1,6 +1,6 @@
 {
     "name": "littlerocket/workflow-extensions-bundle",
-    "description": "Bundle for extended workflow management and automation",
+    "description": "Bundle for extended workflow management and automation.",
     "type": "symfony-bundle",
     "license": "MIT",
     "authors": [
