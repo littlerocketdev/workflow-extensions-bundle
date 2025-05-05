@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Gtt\Bundle\WorkflowExtensionsBundle;
 
 use Symfony\Component\Workflow\Workflow;
+use Symfony\Component\Workflow\WorkflowInterface;
 
 /**
  * Workflow context
@@ -31,7 +32,7 @@ class WorkflowContext
     /**
      * Workflow instance
      *
-     * @var Workflow
+     * @var WorkflowInterface
      */
     private $workflow;
 
@@ -52,11 +53,11 @@ class WorkflowContext
     /**
      * WorkflowContext constructor.
      *
-     * @param Workflow   $workflow
+     * @param WorkflowInterface   $workflow
      * @param object     $subject
      * @param string|int $subjectId
      */
-    public function __construct(Workflow $workflow, $subject, $subjectId)
+    public function __construct(WorkflowInterface $workflow, $subject, $subjectId)
     {
         $this->workflow  = $workflow;
         $this->subject   = $subject;
@@ -64,9 +65,9 @@ class WorkflowContext
     }
 
     /**
-     * @return Workflow
+     * @return WorkflowInterface
      */
-    public function getWorkflow(): Workflow
+    public function getWorkflow(): WorkflowInterface
     {
         return $this->workflow;
     }
