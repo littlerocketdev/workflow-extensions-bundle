@@ -68,6 +68,7 @@ class ContainerAwareExpressionLanguage extends ExpressionLanguage
      * Parse an expression with ContainerInterface context
      *
      * {@inheritdoc}
+     *
      */
     public function parse(Expression|string $expression, array $names, int $flags = 0): ParsedExpression
     {
