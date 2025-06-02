@@ -15,6 +15,7 @@ namespace Gtt\Bundle\WorkflowExtensionsBundle\Command;
 use Gtt\Bundle\WorkflowExtensionsBundle\Action\Executor as ActionExecutor;
 use Gtt\Bundle\WorkflowExtensionsBundle\WorkflowContext;
 use Gtt\Bundle\WorkflowExtensionsBundle\WorkflowSubject\SubjectManipulator;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -26,6 +27,7 @@ use Symfony\Component\Workflow\Registry as WorkflowRegistry;
  *
  * Useful for scheduled execution
  */
+#[AsCommand(name: "workflow:action:execute")]
 class ExecuteActionCommand extends Command
 {
     /**
