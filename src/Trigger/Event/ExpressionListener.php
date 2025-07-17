@@ -74,7 +74,7 @@ class ExpressionListener extends AbstractActionListener
         $expression = $this->supportedEventsConfig[$eventName][$workflowContext->getWorkflow()->getName()]['expression'];
 
         $this->execute(
-            function () use ($expression, $event, $workflowContext) {
+            function () use ($expression, $event, $workflowContext): void {
                 $this->actionLanguage->evaluate($expression, ['event' => $event, 'workflowContext' => $workflowContext]);
             },
             $eventName,

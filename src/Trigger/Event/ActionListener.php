@@ -85,7 +85,7 @@ class ActionListener extends AbstractActionListener
 
         foreach ($actions as $action) {
             $this->execute(
-                function () use ($workflowContext, $action) {
+                function () use ($workflowContext, $action): void {
                     $this->actionExecutor->execute($workflowContext, $action->getName(), $action->getArguments());
                 },
                 $eventName,

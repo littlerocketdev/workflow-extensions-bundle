@@ -27,6 +27,7 @@
         "littlerocket/job-queue-bundle": "^5",
         "nesbot/carbon": "*",
         "phpunit/phpunit": "*",
+        "rector/rector": "^2.1",
         "symfony/browser-kit": "^7.3",
         "symfony/monolog-bundle": "*",
         "symfony/property-access": "^7.3",
