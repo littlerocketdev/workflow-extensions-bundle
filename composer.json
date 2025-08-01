@@ -11,6 +11,10 @@
         {
             "name": "Daan Gebraad",
             "email": "daan@littlerocket.nl"
+        },
+        {
+            "name": "Cagdas Ozturk",
+            "email": "cagdas@littlerocket.nl"
         }
     ],
     "require": {
