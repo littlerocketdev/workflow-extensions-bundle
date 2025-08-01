@@ -34,18 +34,18 @@ class ScheduledJobRepository extends EntityRepository
     public function findScheduledJobToReschedule(Job $originalJob)
     {
         // fetching scheduled job that was not started before - it can be rescheduled
-        $queryString = <<<'QUERY'
-            SELECT sj FROM WorkflowExtensionsBundle:ScheduledJob sj
+        $queryString = " 
+            SELECT sj FROM {$this->getEntityName()} sj
             JOIN sj.job j
             WHERE
                 j.state in (:stateNew, :statePending) AND
                 j.command = :command AND
                 j.args = :args AND
                 sj.reschedulable = 1
-QUERY;
+        ";
 
         /** @var ScheduledJob[] $scheduledJobsToReschedule */
-        $scheduledJobsToReschedule = $this->_em
+        $scheduledJobsToReschedule = $this->getEntityManager()
             ->createQuery($queryString)
             ->setParameters([
                 'stateNew'     => Job::STATE_NEW,
