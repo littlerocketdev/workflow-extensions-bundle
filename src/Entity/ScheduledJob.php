@@ -45,7 +45,7 @@ class ScheduledJob
      *
      * @var boolean
      *
-     * @ORM\Column(type = "boolean", columnDefinition="COMMENT 'Defines whether related job can be rescheduled or not'")
+     * @ORM\Column(type = "boolean", options={"comment": "Defines whether related job can be rescheduled or not")
      */
     private $reschedulable = true;
 
