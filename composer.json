@@ -11,26 +11,31 @@
         {
             "name": "Daan Gebraad",
             "email": "daan@littlerocket.nl"
+        },
+        {
+            "name": "Cagdas Ozturk",
+            "email": "cagdas@littlerocket.nl"
         }
     ],
     "require": {
-        "php": "^7.4 || ^8.0",
+        "php": "^8.3",
         "psr/container": "*",
-        "symfony/expression-language": "*",
-        "symfony/framework-bundle": "^4.4 || ^5.4",
-        "symfony/workflow": "*"
+        "symfony/expression-language": "^7.3",
+        "symfony/framework-bundle": "^7.3",
+        "symfony/workflow": "^7.3"
     },
     "require-dev": {
         "doctrine/doctrine-bundle": "*",
         "doctrine/doctrine-fixtures-bundle": "*",
         "doctrine/orm": "*",
-        "littlerocket/job-queue-bundle": "^3.0",
+        "littlerocket/job-queue-bundle": "^5",
         "nesbot/carbon": "*",
         "phpunit/phpunit": "*",
-        "symfony/browser-kit": "*",
+        "rector/rector": "^2.1",
+        "symfony/browser-kit": "^7.3",
         "symfony/monolog-bundle": "*",
-        "symfony/property-access": "*",
-        "symfony/yaml": "*"
+        "symfony/property-access": "^7.3",
+        "symfony/yaml": "^7.3"
     },
     "suggest": {
         "littlerocket/job-queue-bundle": "Needed for workflow transitions scheduling",
@@ -47,7 +52,7 @@
     "config": {
         "sort-packages": true,
         "platform": {
-            "php": "7.4.33"
+            "php": "8.3"
         }
     },
     "extra": {
